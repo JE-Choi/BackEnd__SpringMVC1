@@ -2,12 +2,15 @@ package com.example.servlet.web.frontcontroller.v5;
 
 import com.example.servlet.web.frontcontroller.ModelView;
 import com.example.servlet.web.frontcontroller.MyView;
-import com.example.servlet.web.frontcontroller.v3.ControllerV3;
 import com.example.servlet.web.frontcontroller.v3.controller.MemberFromControllerV3;
 import com.example.servlet.web.frontcontroller.v3.controller.MemberListContollerV3;
 import com.example.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
-import com.example.servlet.web.frontcontroller.v5.adapter.ContollerV3HandlerAdapter;
-import org.springframework.lang.Nullable;
+import com.example.servlet.web.frontcontroller.v4.ControllerV4;
+import com.example.servlet.web.frontcontroller.v4.controller.MemberFromControllerV4;
+import com.example.servlet.web.frontcontroller.v4.controller.MemberListContollerV4;
+import com.example.servlet.web.frontcontroller.v4.controller.MemberSaveControllerV4;
+import com.example.servlet.web.frontcontroller.v5.adapter.ControllerV3HandlerAdapter;
+import com.example.servlet.web.frontcontroller.v5.adapter.ControllerV4HandlerAdapter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,14 +34,20 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     private void initHandlerAdapters() {
-        this.handlerAdapters.add(new ContollerV3HandlerAdapter());
+        this.handlerAdapters.add(new ControllerV3HandlerAdapter());
+        this.handlerAdapters.add(new ControllerV4HandlerAdapter());
     }
 
     private void initHandlerMappingMap() {
         this.handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFromControllerV3());
         this.handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         this.handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListContollerV3());
+
+        this.handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFromControllerV4());
+        this.handlerMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
+        this.handlerMappingMap.put("/front-controller/v5/v4/members", new MemberListContollerV4());
     }
+
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
