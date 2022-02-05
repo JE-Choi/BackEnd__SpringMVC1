@@ -2,13 +2,16 @@ package com.example.servlet.web.frontcontroller.v5;
 
 import com.example.servlet.web.frontcontroller.ModelView;
 import com.example.servlet.web.frontcontroller.MyView;
+import com.example.servlet.web.frontcontroller.v2.controller.MemberFromControllerV2;
+import com.example.servlet.web.frontcontroller.v2.controller.MemberListContollerV2;
+import com.example.servlet.web.frontcontroller.v2.controller.MemberSaveControllerV2;
 import com.example.servlet.web.frontcontroller.v3.controller.MemberFromControllerV3;
 import com.example.servlet.web.frontcontroller.v3.controller.MemberListContollerV3;
 import com.example.servlet.web.frontcontroller.v3.controller.MemberSaveControllerV3;
-import com.example.servlet.web.frontcontroller.v4.ControllerV4;
 import com.example.servlet.web.frontcontroller.v4.controller.MemberFromControllerV4;
 import com.example.servlet.web.frontcontroller.v4.controller.MemberListContollerV4;
 import com.example.servlet.web.frontcontroller.v4.controller.MemberSaveControllerV4;
+import com.example.servlet.web.frontcontroller.v5.adapter.ControllerV2HandlerAdapter;
 import com.example.servlet.web.frontcontroller.v5.adapter.ControllerV3HandlerAdapter;
 import com.example.servlet.web.frontcontroller.v5.adapter.ControllerV4HandlerAdapter;
 
@@ -34,11 +37,16 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     private void initHandlerAdapters() {
+        this.handlerAdapters.add(new ControllerV2HandlerAdapter());
         this.handlerAdapters.add(new ControllerV3HandlerAdapter());
         this.handlerAdapters.add(new ControllerV4HandlerAdapter());
     }
 
     private void initHandlerMappingMap() {
+        this.handlerMappingMap.put("/front-controller/v5/v2/members/new-form", new MemberFromControllerV2());
+        this.handlerMappingMap.put("/front-controller/v5/v2/members/save", new MemberSaveControllerV2());
+        this.handlerMappingMap.put("/front-controller/v5/v2/members", new MemberListContollerV2());
+
         this.handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFromControllerV3());
         this.handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         this.handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListContollerV3());
